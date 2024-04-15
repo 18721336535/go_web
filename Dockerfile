@@ -1,4 +1,4 @@
-# 基础镜像
+# base image
 FROM golang:alpine
 # 环境变量
 ENV GOPROXY https://goproxy.cn,direct

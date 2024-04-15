@@ -20,7 +20,8 @@ func handFooFunc(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	//  curl -X POST http://127.0.0.1:8088/demofoo -H 'Content-Type: application/json' -d '{"login":"login","password":"password"}'
+
+	//  curl -X POST http://127.0.0.1:8088/demo/foo -H 'Content-Type: application/json' -d '{"login":"login","password":"password"}'
 	http.HandleFunc("/demo/foo", handFooFunc)
 
 	//http://127.0.0.1:8088/toolkit.html
