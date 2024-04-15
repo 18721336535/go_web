@@ -1,0 +1,114 @@
+    <!-- 内容头部 -->
+    <section class="content-header">
+        <h1>
+            Data Management
+            <small>Data Search</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> First Page</a></li>
+            <li><a href="#">Data Management</a></li>
+            <li class="active">Data Search</li>
+        </ol>
+    </section>
+    <!-- 内容头部 /-->
+
+    <!-- 正文区域 -->
+
+    <section class="content" id="content-section">
+
+        <!-- .box-body -->
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">&nbsp;input:</h3>
+            </div>
+            <div class="box-header with-border">
+                <div class="form-group form-inline">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <select class="form-control btn-default input-sm" >
+                        <option value="director">filesPath</option>
+                        <option value="file">file</option>
+                    </select>
+                    <input type="text" class="form-control input-sm data-manage-input-sm" id="search-path-id" style="width:300px" placeholder="filesPath">
+                    <button type="button" class="btn btn-default input-sm" title="preview" @click="getFileHeads()"><i class="fa fa-check"></i> preview</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <label class="btn btn-default input-sm">columnName:value</label>
+                    <input type="text" class="form-control input-sm data-manage-input-sm" id="filed-search-key-value-id" style="width:200px" placeholder="Key1:value1,key2:value2">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-default input-sm" title="preview" @click="findDataByFiledNameAndValue()"><i class="fa fa-check"></i> show</button>
+                </div>
+                <div v-html="div_heads_message"></div>
+            </div>
+            <div class="">
+                <div class="box-header with-border">
+                    <h3 class="box-title">&nbsp;output:</h3>
+                </div>
+            </div>
+            <div class="box-body">
+                <!-- 数据表格 -->
+                <div class="table-box">
+                    <!--工具栏-->
+                    <div class="pull-left">
+                        <div class="form-group form-inline">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default" title="preview"><i class="fa fa-check"></i> preview</button>
+                                <button type="button" class="btn btn-default" title="analyze"><i class="fa fa-check"></i> analyze</button>
+                                <button type="button" class="btn btn-default" title="refresh"><i class="fa fa-refresh"></i> refresh</button>
+                                <button type="button" class="btn btn-default" title="report"><i class="fa fa-file-o"></i> email</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-tools pull-right">
+                        <div class="has-feedback">
+                            <input type="text" class="form-control input-sm" placeholder="search">
+                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <!--工具栏/-->
+                    <!--Data List-->
+                    <table id="dataList" class="table table-bordered table-striped table-hover dataTable mytablecss">
+                        <thead>
+                        <tr>
+                            <th class="" style="padding-right:0px;">
+                                <input id="selall" type="checkbox" class="icheckbox_square-blue">
+                            </th>
+                            <th class="text-center sorting_asc">ID</th>
+                            <th class="text-center sorting_desc">FileName</th>
+                            <th class="text-center sorting_asc_disabled">FilePath</th>
+                            <th class="text-center sorting_desc_disabled">FileSize</th>
+                            <th class="text-center sorting">LastUpdateTime</th>
+                            <th class="text-center">Custom params</th>
+                            <th class="text-center">Operation</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-center">AnalyzeResult</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+<!--                        <tr v-for="file in fileList">-->
+<!--                            <td><input name="ids" type="checkbox"></td>-->
+<!--                            <td>{{file.id}}</td>-->
+<!--                            <td>{{file.fileName}}</td>-->
+<!--                            <td>{{file.filePath}}</td>-->
+<!--                            <td>{{file.fileSize}}</td>-->
+<!--                            <td>{{file.lastUpdateTime}}</td>-->
+<!--                            <td class="text-center"><button type="button" class="btn bg-olive btn-xs" @click="findById(file.id)">edit</button></td>-->
+<!--                            <td class="text-center"><button type="button" class="btn bg-olive btn-xs" @click="findById(file.id)">execute</button></td>-->
+<!--                            <td class="text-center"><button type="button" class="btn bg-olive btn-xs" @click="findById(file.id)">complete</button></td>-->
+<!--                            <td class="text-center"><button type="button" class="btn bg-olive btn-xs" @click="findById(file.id)">detail</button></td>-->
+<!--                        </tr>-->
+                        </tbody>
+                    </table>
+                    <!--Data List/-->
+                    <div class="box-tools pull-right">
+                        <div class="has-feedback">
+                            <input type="text" class="form-control input-sm" placeholder="搜索">
+                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <!--工具栏/-->
+                </div>
+                <!-- 数据表格 /-->
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </section>

@@ -1,0 +1,208 @@
+
+    <!-- 内容头部 -->
+    <section class="content-header">
+        <h1>
+            数据管理
+            <small>data_comparison</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+            <li><a href="#">数据管理</a></li>
+            <li class="active">data_comparison</li>
+        </ol>
+    </section>
+    <!-- 内容头部 /-->
+
+    <!-- 正文区域 -->
+
+    <section class="content" id="content-section">
+
+        <!-- .box-body -->
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">&nbsp;数据输入:</h3>
+            </div>
+            <div class="box-header with-border">
+                <div class="form-group form-inline">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <select class="form-control btn-default input-sm" >
+                        <option value="director">filesPath</option>
+                        <option value="file">file</option>
+                    </select>
+                    <input type="text" class="form-control input-sm data-manage-input-sm" style="width:300px" placeholder="filesPath">
+                    <button type="button" class="btn btn-default input-sm" title="preview"><i class="fa fa-check"></i> show</button>
+                </div>
+            </div>
+            <!--                <div class="pull-left">-->
+            <div class="">
+                <div class="box-header with-border">
+                    <h3 class="box-title">&nbsp;数据输出:</h3>
+                </div>
+            </div>
+            <div class="box-body">
+
+                <!-- 数据表格 -->
+                <div class="table-box">
+
+                    <!--工具栏-->
+                    <div class="pull-left">
+                        <div class="form-group form-inline">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default" title="preview"><i class="fa fa-check"></i> preview</button>
+                                <button type="button" class="btn btn-default" title="analyze"><i class="fa fa-check"></i> analyze</button>
+                                <button type="button" class="btn btn-default" title="refresh"><i class="fa fa-refresh"></i> refresh</button>
+                                <button type="button" class="btn btn-default" title="report"><i class="fa fa-file-o"></i> email</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-tools pull-right">
+                        <div class="has-feedback">
+                            <input type="text" class="form-control input-sm" placeholder="搜索">
+                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <!--工具栏/-->
+
+                    <!--数据列表-->
+                    <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
+                        <thead>
+                        <tr>
+                            <th class="" style="padding-right:0px;">
+                                <input id="selall" type="checkbox" class="icheckbox_square-blue">
+                            </th>
+                            <th class="sorting_asc">ID</th>
+                            <th class="sorting_desc">FileName</th>
+                            <th class="sorting_asc sorting_asc_disabled">FilePath</th>
+                            <th class="sorting_desc sorting_desc_disabled">FileSize</th>
+                            <th class="sorting">LastUpdateTime</th>
+                            <th class="text-center sorting">Operation</th>
+                            <th class="text-center">AnalyzeResult</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr v-for="file in fileList">
+                            <td><input name="ids" type="checkbox"></td>
+                            <td>{{file.id}}</td>
+                            <td>{{file.fileName}}</td>
+                            <td>{{file.filePath}}</td>
+                            <td>{{file.fileSize}}</td>
+                            <td>{{file.lastUpdateTime}}</td>
+                            <td class="text-center"><button type="button" class="btn bg-olive btn-xs" @click="findById(file.id)">Analyze</button></td>
+                            <td class="text-center"><button type="button" class="btn bg-olive btn-xs" @click="findById(file.id)">AnalyzeDetail</button></td>
+                        </tr>
+
+                        </tbody>
+                        <!--模态窗口-->
+                        <div class="tab-pane" id="tab-model">
+
+                            <div id="myModal" class="modal modal-primary" role="dialog">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title">Detail</h4>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <div class="box-body">
+                                                <div class="form-horizontal">
+                                                    <div class="form-group">
+                                                        <ul>
+                                                            <li>Coffee</li>
+                                                            <li>Tea</li>
+                                                            <li>Milk</li>
+                                                        </ul>
+                                                        <!--                                                            <textarea class="col-sm-5 control-label" rows="10" cols="30">-->
+                                                        <!--                                                                -->
+                                                        <!--                                                            </textarea>-->
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline" data-dismiss="modal">close</button>
+                                        </div>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
+                            <!-- /.modal -->
+                        </div>
+                        <!--模态窗口/-->
+                    </table>
+                    <!--数据列表/-->
+
+                    <!--工具栏-->
+                    <div class="pull-left">
+                        <div class="form-group form-inline">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default" title="create"><i
+                                        class="fa fa-file-o"></i> create
+                                </button>
+                                <button type="button" class="btn btn-default" title="delete"><i
+                                        class="fa fa-trash-o"></i> delete
+                                </button>
+                                <button type="button" class="btn btn-default" title="start"><i class="fa fa-check"></i>
+                                    start
+                                </button>
+                                <button type="button" class="btn btn-default" title="hide"><i class="fa fa-ban"></i>
+                                    hide
+                                </button>
+                                <button type="button" class="btn btn-default" title="refresh"><i
+                                        class="fa fa-refresh"></i> refresh
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-tools pull-right">
+                        <div class="has-feedback">
+                            <input type="text" class="form-control input-sm" placeholder="搜索">
+                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <!--工具栏/-->
+                </div>
+                <!-- 数据表格 /-->
+            </div>
+            <!-- /.box-body -->
+            <!-- .box-footer-->
+            <div class="box-footer">
+                <div class="pull-left">
+                    <div class="form-group form-inline">
+                        total 2 page，total 10 records each page
+                        <select class="form-control">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select> items
+                    </div>
+                </div>
+
+                <div class="box-tools pull-right">
+                    <ul class="pagination">
+                        <li>
+                            <a href="#" aria-label="Previous">first page</a>
+                        </li>
+                        <li><a href="#">last</a></li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">next</a></li>
+                        <li>
+                            <a href="#" aria-label="Next">end</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            <!-- /.box-footer-->
+        </div>
+    </section>
