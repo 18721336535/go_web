@@ -8,7 +8,7 @@ RUN mkdir /app
 ADD . /app/
 # go to app dir
 WORKDIR /app
-# 编译源码
+# build
 RUN go build -o main .
-# 运行
+# run
 CMD ["./main"]

@@ -1,10 +1,12 @@
 package main
 
-// 1.引入http包
-// 2.定义路由匹配模式 与对应的处理函数
-// 3.创建http server对象指定监听端口、handler 处理器
-// 4.调用server的ListenAndServe()函数
-
+/**
+https://gowebexamples.com/
+1.引入http包
+2.定义路由匹配模式 与对应的处理函数
+3.创建http server对象指定监听端口、handler 处理器
+4.调用server的ListenAndServe()函数
+*/
 import (
 	"fmt"
 	"io"
