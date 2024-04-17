@@ -7,6 +7,7 @@ https://gowebexamples.com/
 3.创建http server对象指定监听端口、handler 处理器
 4.调用server的ListenAndServe()函数
 */
+
 import (
 	"fmt"
 	"io"
@@ -28,10 +29,10 @@ func handFooFunc(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 
-	//  curl -X POST http://127.0.0.1:8088/demo/foo -H 'Content-Type: application/json' -d '{"login":"login","password":"password"}'
+	// curl -X POST http://127.0.0.1:8088/demo/foo -H 'Content-Type: application/json' -d '{"login":"login","password":"password"}'
 	http.HandleFunc("/demo/foo", handFooFunc)
 
-	//http://127.0.0.1:8088/toolkit.html
+	// http://127.0.0.1:8088/toolkit.html
 	http.Handle("/", http.FileServer(http.Dir("static/")))
 
 	myserver := &http.Server{
