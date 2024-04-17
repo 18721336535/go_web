@@ -1,5 +1,10 @@
 package main
 
+// 1.引入http包
+// 2.定义路由匹配模式 与对应的处理函数
+// 3.创建http server对象指定监听端口、handler 处理器
+// 4.调用server的ListenAndServe()函数
+
 import (
 	"fmt"
 	"io"
@@ -25,8 +30,7 @@ func main() {
 	http.HandleFunc("/demo/foo", handFooFunc)
 
 	//http://127.0.0.1:8088/toolkit.html
-	fs := http.FileServer(http.Dir("static/"))
-	http.Handle("/", fs)
+	http.Handle("/", http.FileServer(http.Dir("static/")))
 
 	myserver := &http.Server{
 		Addr:           ":8088",
@@ -35,7 +39,7 @@ func main() {
 		WriteTimeout:   180 * time.Second,
 		MaxHeaderBytes: 1 << 20,
 	}
-
+	fmt.Printf("server serving ...")
 	myserver.ListenAndServe()
 
 }
