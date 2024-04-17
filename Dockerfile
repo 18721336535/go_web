@@ -1,6 +1,6 @@
 # base image alpine
 FROM golang:alpine
-# GOPROXY
+# ev GOPROXY
 ENV GOPROXY https://goproxy.cn,direct
 # create dir
 RUN mkdir /app 

@@ -4,7 +4,7 @@ package main
 https://gowebexamples.com/
 1.引入 http 包
 2.定义路由匹配模式与对应的处理函数
-3.创建http server对象，指定监听端口和 handler 处理器类型
+3.创建 http server对象，指定监听端口和 handler 处理器类型
 4.调用server的ListenAndServe()函数
 */
 import (
