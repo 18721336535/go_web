@@ -1,4 +1,4 @@
-# base image alpine
+# base image
 FROM golang:alpine
 # env GOPROXY
 ENV GOPROXY https://goproxy.cn,direct
