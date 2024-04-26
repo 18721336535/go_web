@@ -1,20 +1,25 @@
 package main
 
-/**
-https://gowebexamples.com/
- 1. 引入 http 包
- 2. 定义路由匹配模式与对应的处理函数
- 3. 创建 http server对象，指定监听端口和 handler 处理器类型
- 4. 调用server的ListenAndServe()函数
-*/
 import (
 	"fmt"
 	"io"
 	"net/http"
+	_ "net/http/pprof"
 	"time"
+
+	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
+)
+
+var pingCounter = prometheus.NewCounter(
+	prometheus.CounterOpts{
+		Name: "ping_request_count",
+		Help: "No of request handled by Ping handler",
+	},
 )
 
 func handFooFunc(w http.ResponseWriter, r *http.Request) {
+	pingCounter.Inc()
 	defer r.Body.Close()
 	body, err := io.ReadAll(r.Body)
 	if err != nil {
@@ -27,11 +32,13 @@ func handFooFunc(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	prometheus.MustRegister(pingCounter)
 
-	// curl -X POST http://127.0.0.1:8088/demo/foo -H 'Content-Type: application/json' -d '{"login":"login","password":"password"}'
+	http.Handle("/metrics", promhttp.Handler())
+	//  curl -X POST http://127.0.0.1:8088/demo/foo -H 'Content-Type: application/json' -d '{"login":"login","password":"password"}'
 	http.HandleFunc("/demo/foo", handFooFunc)
 
-	// http://127.0.0.1:8088/toolkit.html
+	//http://127.0.0.1:8088/toolkit.html
 	http.Handle("/", http.FileServer(http.Dir("static/")))
 
 	myserver := &http.Server{
@@ -41,7 +48,7 @@ func main() {
 		WriteTimeout:   180 * time.Second,
 		MaxHeaderBytes: 1 << 20,
 	}
-	fmt.Printf("server serving ...")
+
 	myserver.ListenAndServe()
 
 }
